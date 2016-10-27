@@ -9,6 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    android:layoutDirection="ltr"
     tools:context="com.example.narzoan.ex1.MainActivity">
 
     <TextView

@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,10 +22,12 @@ public class MainActivity extends AppCompatActivity {
         final EditText numInputText = (EditText) findViewById(R.id.input_id);
         final CheckBox foodCheckbox = (CheckBox) findViewById(R.id.checkbox_id);
         final Button orderButton = (Button) findViewById(R.id.button_id);
+        final SeekBar seekBar = (SeekBar) findViewById(R.id.seek_id);
 
         numInputText.addTextChangedListener(new TextWatcher() {
 
             public void afterTextChanged(Editable s) {
+                //seekBar.setProgress(Integer.parseInt(numInputText.getText().toString()));
                 if (foodCheckbox.isChecked() && checkEditTextInput(numInputText)){
                     orderButton.setEnabled(true);
                 }
@@ -33,6 +36,23 @@ public class MainActivity extends AppCompatActivity {
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             public void onTextChanged(CharSequence s, int start, int before, int count) {}
+        });
+
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            int progressChanged = 0;
+
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
+                progressChanged = progress;
+                //numInputText.setText(progressChanged);
+            }
+
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                // TODO Auto-generated method stub
+            }
+
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
         });
 
 

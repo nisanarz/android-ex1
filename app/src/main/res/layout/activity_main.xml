@@ -32,7 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/input_title_id"
-        android:hint="@string/input_hint_content"/>
+        android:hint="@string/input_hint_content"
+        android:inputType="numberDecimal" />
 
     <SeekBar
         android:id="@+id/seek_id"
@@ -46,7 +47,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/seek_id"
-        android:text="@string/checkbox_title"/>
+        android:text="@string/checkbox_title"
+        android:onClick="onCheckboxClicked"/>
 
     <Button
         android:id="@+id/button_id"

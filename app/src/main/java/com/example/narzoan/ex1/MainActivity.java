@@ -8,86 +8,123 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+    private EditText numInputText;
+    private CheckBox foodCheckbox;
+    private Button orderButton;
+    private SeekBar seekBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final EditText numInputText = (EditText) findViewById(R.id.input_id);
-        final CheckBox foodCheckbox = (CheckBox) findViewById(R.id.checkbox_id);
-        final Button orderButton = (Button) findViewById(R.id.button_id);
-        final SeekBar seekBar = (SeekBar) findViewById(R.id.seek_id);
+        numInputText = (EditText) findViewById(R.id.input_id);
+        foodCheckbox = (CheckBox) findViewById(R.id.checkbox_id);
+        orderButton = (Button) findViewById(R.id.button_id);
+        seekBar = (SeekBar) findViewById(R.id.seek_id);
 
         numInputText.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-                //seekBar.setProgress(Integer.parseInt(numInputText.getText().toString()));
-                if (foodCheckbox.isChecked() && checkEditTextInput(numInputText)){
-                    orderButton.setEnabled(true);
-                }
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                checkButtonValid();
             }
 
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                String inputText = (String) s.toString();
+                int sheep_num = 0;
+                if (inputText.length() > 0) {
+                    sheep_num = Integer.parseInt(inputText);
+                }
+                seekBar.setProgress(sheep_num);
+                checkButtonValid();
+            }
 
-            public void onTextChanged(CharSequence s, int start, int before, int count) {}
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int progressChanged = 0;
 
+            @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser){
                 progressChanged = progress;
-                //numInputText.setText(progressChanged);
+                String str = Integer.toString(progressChanged);
+                if (fromUser){
+                    if (progressChanged == 0){
+                        numInputText.setText("");
+                        return;
+                    }
+                    numInputText.setText(str);
+                    numInputText.setSelection(str.length());
+                    checkButtonValid();
+                }
+
             }
 
+            @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 // TODO Auto-generated method stub
             }
 
+            @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
 
             }
         });
 
+        foodCheckbox.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                checkButtonValid();
+            }
+        });
 
     }
 
     public void makeOrder(View view){
         //TODO: validate the inputs before enabing the button
-        //check if its positive number and the checkBox are checked
-        //orderButton.setEnabled(true);
-        Button orderButton = (Button) findViewById(R.id.button_id);
-        EditText numInputText = (EditText) findViewById(R.id.input_id);
-        CheckBox foodCheckbox = (CheckBox) findViewById(R.id.checkbox_id);
+        orderButton = (Button) findViewById(R.id.button_id);
+        numInputText = (EditText) findViewById(R.id.input_id);
+        foodCheckbox = (CheckBox) findViewById(R.id.checkbox_id);
 
-        Toast.makeText(getApplicationContext(),"Order has been made",Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(),"Order sent",Toast.LENGTH_SHORT).show();
         orderButton.setEnabled(false);
         numInputText.setText("");
         foodCheckbox.setChecked(false);
 
     }
 
-    public void onCheckboxClicked(View view){
-        CheckBox foodCheckbox = (CheckBox) findViewById(R.id.checkbox_id);
-        EditText numInputText = (EditText) findViewById(R.id.input_id);
-        Button orderButton = (Button) findViewById(R.id.button_id);
-
+    private void checkButtonValid(){
         if (foodCheckbox.isChecked() && checkEditTextInput(numInputText)){
             orderButton.setEnabled(true);
+        }
+        else {
+            orderButton.setEnabled(false);
         }
     }
 
     private boolean checkEditTextInput(EditText et){
         //TODO: validate the input.text value.
-
-        int inputInt = Integer.parseInt(et.getText().toString());
-        if (inputInt > 0) {
+//        if (et.getText().toString().isEmpty()){
+//            return false;
+//        }
+        String text = et.getText().toString();
+        int sheep_num = 0;
+        if (text.length() > 0) {
+            sheep_num = Integer.parseInt(text);
+        }
+        if (sheep_num > 0) {
             return true;
         }
         return false;

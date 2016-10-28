@@ -34,14 +34,15 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/input_title_id"
         android:hint="@string/input_hint_content"
-        android:inputType="numberDecimal" />
+        android:inputType="number"
+        android:maxLength="9"/>
 
     <SeekBar
         android:id="@+id/seek_id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/input_id"
-        android:max="100"/>
+        android:max="999"/>
 
     <CheckBox
         android:id="@+id/checkbox_id"
@@ -49,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/seek_id"
         android:text="@string/checkbox_title"
-        android:onClick="onCheckboxClicked"/>
+        android:checked="false"/>
 
     <Button
         android:id="@+id/button_id"
@@ -58,7 +59,8 @@
         android:layout_below="@id/checkbox_id"
         android:text="@string/button_content"
         android:enabled="false"
-        android:onClick="makeOrder"/>
+        android:onClick="makeOrder"
+        android:textAllCaps="false"/>
 
 
 </RelativeLayout>

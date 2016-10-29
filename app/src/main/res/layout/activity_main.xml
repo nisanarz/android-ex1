@@ -8,59 +8,62 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:orientation="vertical"
     android:layoutDirection="ltr"
     tools:context="com.example.narzoan.ex1.MainActivity">
 
     <TextView
     android:id="@+id/title_id"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:textSize="20sp"
+    android:layout_alignParentTop="true"
+    android:layout_centerHorizontal="true"
+    android:textSize="30dp"
     android:text="@string/main_title" />
 
-    <TextView
-        android:id="@+id/input_title_id"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:layout_below="@id/title_id"
-        android:layout_marginTop="30dp"
-        android:text="@string/input_ins" />
+        android:gravity="center_vertical"
+        >
 
-    <EditText
-        android:id="@+id/input_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/input_title_id"
-        android:hint="@string/input_hint_content"
-        android:inputType="number"
-        android:maxLength="9"/>
+        <TextView
+            android:id="@+id/input_title_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/input_ins" />
 
-    <SeekBar
-        android:id="@+id/seek_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/input_id"
-        android:max="999"/>
+        <EditText
+            android:id="@+id/input_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/input_hint_content"
+            android:inputType="number"
+            android:maxLength="9"/>
 
-    <CheckBox
-        android:id="@+id/checkbox_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/seek_id"
-        android:text="@string/checkbox_title"
-        android:checked="false"/>
+        <SeekBar
+            android:id="@+id/seek_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="999"/>
 
-    <Button
-        android:id="@+id/button_id"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/checkbox_id"
-        android:text="@string/button_content"
-        android:enabled="false"
-        android:onClick="makeOrder"
-        android:textAllCaps="false"/>
+        <CheckBox
+            android:id="@+id/checkbox_id"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/checkbox_title"
+            android:checked="false"/>
+
+        <Button
+            android:id="@+id/button_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/button_content"
+            android:enabled="false"
+            android:onClick="makeOrder"
+            android:textAllCaps="false"/>
+    </LinearLayout>
 
 
 </RelativeLayout>

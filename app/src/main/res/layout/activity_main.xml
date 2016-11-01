@@ -38,15 +38,14 @@
             android:id="@+id/input_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/input_hint_content"
             android:inputType="number"
-            android:maxLength="9"/>
+            android:layoutDirection="ltr"/>
 
         <SeekBar
             android:id="@+id/seek_id"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="999"/>
+            android:max="100"/>
 
         <CheckBox
             android:id="@+id/checkbox_id"
